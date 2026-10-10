@@ -2,5 +2,5 @@
    protects the data. Never put the service-role key, Anthropic key or family code here. */
 window.APP_CONFIG = {
   SUPABASE_URL: 'https://fahzmhatfjvaeaaqcioj.supabase.co',
-  SUPABASE_ANON_KEY: 'PASTE_PUBLISHABLE_KEY_HERE', // Supabase → Project Settings → API Keys
+  SUPABASE_ANON_KEY: 'sb_publishable_dWrdQgTwDX79jYySFxRRIw_kFE7pvyV', // Supabase → Project Settings → API Keys
 };
