@@ -23,7 +23,8 @@ Deno.serve(async (req) => {
   while (messages.length && messages[0].role !== "user") messages.shift();
   if (!messages.length || messages[messages.length - 1].role !== "user") return json({ error: "bad_messages" }, 400);
 
-  const key = Deno.env.get("ANTHROPIC_API_KEY");
+  // Tolerate stray spaces/quotes/newlines from pasting the secret.
+  const key = (Deno.env.get("ANTHROPIC_API_KEY") ?? "").trim().replace(/^["']|["']$/g, "").trim();
   if (!key) return json({ error: "no_api_key" }, 500);
 
   let res: Response;
@@ -44,8 +45,12 @@ Deno.serve(async (req) => {
   if (res.status === 429) return json({ error: "rate_limited" }, 429);
   if (res.status === 529) return json({ error: "busy" }, 503);
   if (!res.ok) {
-    console.error("anthropic", res.status, (await res.text()).slice(0, 500));
-    return json({ error: "upstream_error" }, 502);
+    // Anthropic error bodies never echo the API key, so the type/message are safe to return to members.
+    const raw = await res.text();
+    console.error("anthropic", res.status, raw.slice(0, 500));
+    let type = "", detail = "";
+    try { const e = JSON.parse(raw).error ?? {}; type = String(e.type ?? ""); detail = String(e.message ?? "").slice(0, 200); } catch { /* not JSON */ }
+    return json({ error: "upstream_error", upstream_status: res.status, upstream_type: type, detail }, 502);
   }
   const data = await res.json();
   const text = (data.content ?? []).filter((c: { type: string }) => c.type === "text")
