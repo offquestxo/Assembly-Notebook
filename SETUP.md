@@ -29,7 +29,7 @@ supabase functions deploy ai --no-verify-jwt
 ## 3. GitHub Pages
 
 Commit and push to `main`, then go to **GitHub → repo Settings → Pages → Build and deployment → Deploy from a branch → `main` / `/ (root)`** → Save.
-After a minute or two the site is at `https://offquestxo.github.io/assembly-notebook/`.
+After a minute or two the site is at `https://offquestxo.github.io/Assembly-Notebook/`.
 
 ## 4. Each phone / iPad (on Wi-Fi)
 

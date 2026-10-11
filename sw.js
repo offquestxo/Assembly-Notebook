@@ -1,5 +1,5 @@
 /* Service worker: app shell offline. Bump VERSION on every deploy so phones pick up changes. */
-const VERSION = 'v1-2026-10-10a';
+const VERSION = 'v2-2026-10-10-final';
 const SHELL = ['./', './index.html', './styles.css', './config.js', './data.js', './app.js', './vendor/supabase.js',
   './manifest.webmanifest', './icons/icon.svg', './icons/icon-192.png', './icons/icon-512.png', './icons/apple-touch-icon.png'];
 const FONT_CACHE = 'fonts-v1';
