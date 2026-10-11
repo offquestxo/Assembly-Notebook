@@ -131,7 +131,9 @@ const BINGO = {
 };
 const BINGO_EN = {'tin cậy':'trust','hạnh phúc':'happy','Đức Giê-hô-va':'Jehovah','hết lòng':'whole heart','Châm ngôn':'Proverbs','noi gương':'imitate','Ba-rác':'Barak','Su-nem':'Shunammite','Đa-ni-ên':'Daniel','sống lại':'raised to life','cầu nguyện':'pray','Kinh Thánh':'Bible','giúp người khác':'help others','hằng sống':'living','cuộc trò chuyện':'conversation','gốc gác':'background','suy nghĩ':'thinking','báp-têm':'baptism','Cha trên trời':'Father in heaven','kín đáo':'in secret','thưởng':'reward','con trai':'son','Đức Chúa Trời':'God','thánh chức':'ministry','đáng tin cậy':'trustworthy','Tháp Canh':'Watchtower','khôn ngoan':'wisdom','con cái':'children','hướng dẫn':'guide','tương lai':'future','kế hoạch':'plans','cám dỗ':'temptation','luôn':'always','gia đình':'family','lời cầu nguyện':'a prayer','thật sự':'really','bài học':'lesson','quyết định':'decision','bình an':'peace','yêu thương':'love'};
 
-const COLORS = ['#3E7CB1','#C2569B','#2E9A75','#CF7F26','#7A62C9','#C0473F','#3C9DB5'];
+const MAX_PEOPLE = 20;
+const COLORS = ['#3E7CB1','#C2569B','#2E9A75','#CF7F26','#7A62C9','#C0473F','#3C9DB5',
+  '#8A6D1E','#B4528A','#4F8A3A','#D0603A','#5468C8','#9A4FB0','#2F8C8C','#B85C6B','#6E7F2A','#C27A1E','#4B6FA0','#A0522D','#5B8F6E'];
 const UI = {
  program:['Program','Chương trình'], games:['Games','Trò chơi'], words:['Words','Từ vựng'], chat:['Family','Gia đình'], ask:['Ask AI','Hỏi AI'],
  morning:['Morning','Buổi sáng'], afternoon:['Afternoon','Buổi chiều'], music:['Music','Âm nhạc'], song:['Song','Bài hát'], prayer:['and Prayer','và cầu nguyện'], ann:['and Announcements','và thông báo'],
@@ -139,7 +141,7 @@ const UI = {
  myNotes:['My notes','Ghi chú của tôi'], notePh:['Type the points you hear…','Ghi lại những điểm bạn nghe…'], family:['Family notes','Ghi chú của gia đình'], nobody:['No one else has written yet.','Chưa ai khác ghi chú.'],
  tryVi:['Help me say it in Vietnamese','Giúp tôi nói bằng tiếng Việt'], saved:['Saved','Đã lưu'], savedHere:['Saved on this phone','Đã lưu trên máy'],
  now:['Now','Đang diễn ra'], jump:['Go','Xem'], synced:['Synced with family','Đã đồng bộ'], waiting:['Saved here · will sync','Đã lưu · sẽ đồng bộ'], offline:['No signal · saved here','Mất sóng · đã lưu trên máy'], local:['This device only','Chỉ trên máy này'], readonly:['View only','Chỉ xem'],
- who:['Who’s listening?','Ai đang nghe?'], whoSub:['Pick your name. Each phone remembers who you are, and anyone can switch.','Chọn tên của bạn.'], add:['Add','Thêm'], addPh:['Name','Tên'], max:['Up to 7 people','Tối đa 7 người'], done:['Done','Xong'],
+ who:['Who’s listening?','Ai đang nghe?'], whoSub:['Pick your name. Each phone remembers who you are, and anyone can switch.','Chọn tên của bạn.'], add:['Add','Thêm'], addPh:['Name','Tên'], max:['Up to 20 people','Tối đa 20 người'], done:['Done','Xong'],
  score:['Family points','Điểm gia đình'], bingo:['Bingo','Bingo'], verses:['Scripture Hunt','Tìm câu Kinh Thánh'], match:['Word Match','Ghép từ'], review:['Review Questions','Câu hỏi ôn lại'],
  bingoHint:['Tap a word when the speaker says it. Five in a row wins a bingo.','Chạm vào từ khi diễn giả nói đến. Năm ô liên tiếp là bingo.'],
  versesHint:['Check off each scripture when it’s read. Add others you hear.','Đánh dấu mỗi câu Kinh Thánh khi được đọc.'],

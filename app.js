@@ -117,7 +117,7 @@ function dropBad(path,err){
   console.warn('sync rejected',path,err);
   if(err.code==='42501'){ /* RLS: this device isn't a member any more */ S.gate=true; LS.set('tc_member',null); render(); return; }
   delete S.pending[path];
-  if(/7 people/.test(err.message||'')) toast(tx('The family already has 7 people.','Gia đình đã có 7 người.'));
+  if(/family is full|\d+ people/.test(err.message||'')) toast(tx('The family list is full (20 people).','Danh sách gia đình đã đủ (20 người).'));
   else toast(tx('One change couldn’t be saved to the family.','Một thay đổi không lưu được.'));
 }
 setInterval(()=>{ if(Object.keys(S.pending).length) flush(); }, 15000);
@@ -765,15 +765,15 @@ function showPicker(){
   $('overlay').innerHTML=`<div class="ov" role="dialog" aria-modal="true" aria-labelledby="pk-h"><div class="sheet">
     <h2 id="pk-h">${u('who')}</h2><div class="saved">${u('whoSub')}</div>
     <div class="people">${ppl.map(p=>`<button class="person" data-pick="${esc(p.id)}" aria-pressed="${p.id===S.me}">${avatar(p,'lg')}${esc(p.name)}</button>`).join('')}</div>
-    ${ppl.length<7?`<div class="addrow"><input id="pk-name" maxlength="20" placeholder="${esc(u('addPh'))}" autocomplete="off"><button class="btn pri" id="pk-add">${u('add')}</button></div><div class="saved">${u('max')}</div>`:''}
+    ${ppl.length<MAX_PEOPLE?`<div class="addrow"><input id="pk-name" maxlength="20" placeholder="${esc(u('addPh'))}" autocomplete="off"><button class="btn pri" id="pk-add">${u('add')}</button></div><div class="saved">${u('max')}</div>`:''}
     ${S.me?`<button class="btn" id="pk-close">${u('done')}</button>`:''}
   </div></div>`;
   setTimeout(()=>{ const i=$('pk-name'); if(i&&!ppl.length) i.focus(); },50);
 }
 function closePicker(){ $('overlay').innerHTML=''; }
 function addPerson(name){
-  name=name.trim(); if(!name) return; const ppl=roster(); if(ppl.length>=7) return;
-  const used=new Set(ppl.map(p=>p.color)); const color=COLORS.find(c=>!used.has(c))||COLORS[ppl.length%7];
+  name=name.trim(); if(!name) return; const ppl=roster(); if(ppl.length>=MAX_PEOPLE) return;
+  const used=new Set(ppl.map(p=>p.color)); const color=COLORS.find(c=>!used.has(c))||COLORS[ppl.length%COLORS.length];
   const p={id:'p'+Date.now().toString(36)+Math.random().toString(36).slice(2,5), name:name.slice(0,20), color, ts:Date.now()};
   write('profile/'+p.id,p); S.me=p.id; LS.set('tc_me',p.id); closePicker(); render(); toast((S.lang==='vi'?'Xin chào, ':'Welcome, ')+p.name);
 }

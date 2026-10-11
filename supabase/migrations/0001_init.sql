@@ -97,15 +97,15 @@ begin
 end $$;
 grant select on public.members to authenticated;
 
--- At most 7 profiles per family. Upserts of an existing profile (rename/recolor) are allowed.
+-- At most 20 profiles per family. Upserts of an existing profile (rename/recolor) are allowed.
 create or replace function public.enforce_profile_limit() returns trigger
   language plpgsql security definer set search_path = public as $$
 begin
   if exists (select 1 from public.profiles where id = new.id) then
     return new;
   end if;
-  if (select count(*) from public.profiles) >= 7 then
-    raise exception 'The family already has 7 people';
+  if (select count(*) from public.profiles) >= 20 then
+    raise exception 'The family is full (20 people)';
   end if;
   return new;
 end $$;
